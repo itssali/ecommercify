@@ -1,0 +1,468 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 15, 15, 15;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 245, 245, 245;
+  --card-bg: 255, 255, 255, 0.7;
+  --card-border: 255, 255, 255, 0.2;
+  --glass-bg: 255, 255, 255, 0.08;
+}
+
+.dark {
+  --foreground-rgb: 245, 245, 245;
+  --background-start-rgb: 17, 17, 17;
+  --background-end-rgb: 9, 9, 9;
+  --card-bg: 30, 30, 30, 0.7;
+  --card-border: 60, 60, 60, 0.2;
+  --glass-bg: 17, 25, 40, 0.6;
+}
+
+html {
+  background-color: rgb(var(--background-start-rgb));
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb))
+    );
+  min-height: 100vh;
+}
+
+/* Fix placeholder text color */
+.dark input::placeholder,
+.dark textarea::placeholder,
+.dark select::placeholder {
+  color: rgba(156, 163, 175, 0.8) !important; /* text-gray-400 with opacity */
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: rgba(50, 50, 50, 0.9) !important; /* Much darker for better contrast */
+  font-weight: 500;
+}
+
+/* Improved dark mode for common elements */
+.dark {
+  color-scheme: dark;
+}
+
+.dark .bg-white {
+  background-color: rgb(17, 24, 39) !important; /* bg-gray-900 */
+}
+
+.dark .bg-white\/80 {
+  background-color: rgba(17, 24, 39, 0.8) !important; /* bg-gray-900/80 */
+}
+
+.dark .text-gray-900 {
+  color: rgb(243, 244, 246) !important; /* text-gray-100 */
+}
+
+.dark .text-gray-700, 
+.dark .text-gray-800 {
+  color: rgb(229, 231, 235) !important; /* text-gray-200 */
+}
+
+/* Ensure light mode text is visible */
+.text-white {
+  color: white !important;
+}
+
+.dark .text-white {
+  color: white !important;  
+}
+
+/* Improve text contrast in light mode */
+.text-gray-300 {
+  color: rgb(55, 65, 81) !important; /* text-gray-700 - much darker for light mode */
+}
+
+.text-gray-400 {
+  color: rgb(75, 85, 99) !important; /* text-gray-600 - much darker for light mode */
+}
+
+.text-gray-500 {
+  color: rgb(31, 41, 55) !important; /* text-gray-800 - much darker for light mode */
+}
+
+.dark .text-gray-300, 
+.dark .text-gray-400 {
+  color: rgb(209, 213, 219) !important; /* text-gray-300 */
+}
+
+.dark .text-gray-500 {
+  color: rgb(156, 163, 175) !important; /* text-gray-400 */
+}
+
+/* Button text contrast fixes */
+.glass-button {
+  color: rgb(31, 41, 55) !important; /* text-gray-800 for light mode */
+  font-weight: 500 !important; /* Make button text bolder */
+  background-color: rgba(255, 255, 255, 0.5) !important; /* Lighter background in light mode */
+}
+
+.dark .glass-button {
+  color: rgb(229, 231, 235) !important; /* text-gray-200 for dark mode */
+  background-color: rgba(17, 25, 40, 0.5) !important; /* Darker background in dark mode */
+}
+
+/* Primary colored buttons should have white text in both modes */
+.bg-primary-600 .glass-button,
+.glass-button.bg-primary-600,
+.glass-button.text-white {
+  color: white !important;
+}
+
+.dark .bg-primary-600 .glass-button,
+.dark .glass-button.bg-primary-600,
+.dark .glass-button.text-white {
+  color: white !important;
+}
+
+/* Make sure all buttons and links have better contrast */
+button, a {
+  color: black !important; /* Force all buttons and links to have black text in light mode */
+}
+
+.dark button, .dark a {
+  color: white !important; /* Force all buttons and links to have white text in dark mode */
+}
+
+/* Exception for specific classes that should override the defaults */
+.text-primary-600, 
+.text-primary-500, 
+.bg-primary-600, 
+.bg-primary-500 {
+  color: inherit !important;
+}
+
+.glass-card button, 
+.glass-card a {
+  color: rgb(31, 41, 55) !important; /* Ensure good contrast in cards */
+}
+
+.dark .glass-card button, 
+.dark .glass-card a {
+  color: rgb(229, 231, 235) !important;
+}
+
+/* Fix for light backgrounds with white text (like hero buttons) */
+button.text-white,
+a.text-white {
+  color: white !important; /* Keep white text by default */
+}
+
+.dark button.text-white,
+.dark a.text-white {
+  color: white !important;
+  text-shadow: none;
+}
+
+/* Fix for hero/landing page buttons specifically */
+[class*="hero"] button,
+[class*="landing"] button,
+[class*="card"] button,
+[class*="glass"] button {
+  color: rgb(17, 24, 39) !important; /* Almost black text on light backgrounds */
+}
+
+.dark [class*="hero"] button,
+.dark [class*="landing"] button,
+.dark [class*="card"] button,
+.dark [class*="glass"] button {
+  color: white !important;
+}
+
+/* Override for colored buttons to allow white text */
+[class*="primary"] button,
+button[class*="primary"],
+[class*="blue"] button,
+button[class*="blue"] {
+  color: white !important;
+}
+
+/* Ensure buttons with dark backgrounds keep white text even in light mode */
+.bg-primary-700,
+.bg-primary-800,
+.bg-primary-900,
+.bg-gray-700,
+.bg-gray-800,
+.bg-gray-900,
+.bg-black,
+[class*="bg-primary-7"],
+[class*="bg-primary-8"],
+[class*="bg-primary-9"],
+[class*="bg-gray-7"],
+[class*="bg-gray-8"],
+[class*="bg-gray-9"],
+.bg-gray-900\/70,
+.bg-black\/50,
+.bg-black\/40 {
+  color: white !important;
+}
+
+/* ONLY apply white text to elements with explicitly dark backgrounds */
+.bg-primary-700 *,
+.bg-primary-800 *,
+.bg-primary-900 *,
+.bg-gray-700 *,
+.bg-gray-800 *,
+.bg-gray-900 *,
+.bg-black *,
+[class*="bg-primary-7"] *,
+[class*="bg-primary-8"] *,
+[class*="bg-primary-9"] *,
+[class*="bg-gray-7"] *,
+[class*="bg-gray-8"] *,
+[class*="bg-gray-9"] *,
+.bg-gray-900\/70 *,
+.bg-black\/50 *,
+.bg-black\/40 * {
+  color: white !important;
+}
+
+/* But don't force white text on buttons that should have dark text */
+button:not([class*="bg-primary"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]):not([class*="bg-black"]), 
+a:not([class*="bg-primary"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]):not([class*="bg-black"]) {
+  color: black !important;
+}
+
+.dark button:not([class*="bg-primary"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]):not([class*="bg-black"]), 
+.dark a:not([class*="bg-primary"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]):not([class*="bg-black"]) {
+  color: white !important;
+}
+
+/* Fix for hero/landing page buttons specifically */
+[class*="hero"] button:not(.bg-primary-700):not([class*="bg-gray-"]):not([class*="bg-black"]),
+[class*="landing"] button:not(.bg-primary-700):not([class*="bg-gray-"]):not([class*="bg-black"]),
+[class*="card"] button:not(.bg-primary-700):not([class*="bg-gray-"]):not([class*="bg-black"]),
+[class*="glass"] button:not(.bg-primary-700):not([class*="bg-gray-"]):not([class*="bg-black"]) {
+  color: rgb(17, 24, 39) !important; /* Dark text */
+}
+
+.dark [class*="hero"] button,
+.dark [class*="landing"] button,
+.dark [class*="card"] button,
+.dark [class*="glass"] button {
+  color: rgb(229, 231, 235) !important; /* Light text in dark mode */
+}
+
+/* Floating animations for glass morphism elements */
+@keyframes float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes float-delay {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(20px) translateX(-10px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) translateX(15px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float-delay 8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+/* Glass button hover effect */
+.glass-button-hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+}
+
+/* Glass card and button styling */
+.glass-card {
+  @apply backdrop-blur-lg shadow-lg;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgb(17, 24, 39); /* Dark text in light mode */
+}
+
+.dark .glass-card {
+  background-color: rgba(17, 25, 40, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  color: rgb(229, 231, 235); /* Light text in dark mode */
+}
+
+.glass-button {
+  @apply backdrop-blur-md transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md;
+  background-color: white !important; /* White background in light mode */
+  border: 1px solid rgba(100, 100, 100, 0.2); /* Darker border for more visibility */
+  font-weight: 500;
+  color: black !important; /* Black text in light mode */
+}
+
+.dark .glass-button {
+  background-color: rgba(17, 25, 40, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  color: white !important; /* White text in dark mode */
+}
+
+/* Remove rounded rectangles in dark mode */
+.dark [class*="glass"] {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Override for buttons with dark backgrounds to ensure they have white text */
+.bg-primary-700 button, 
+.bg-primary-800 button, 
+.bg-primary-900 button,
+.bg-gray-700 button, 
+.bg-gray-800 button, 
+.bg-gray-900 button,
+.bg-black button,
+button.bg-primary-700, 
+button.bg-primary-800, 
+button.bg-primary-900,
+button.bg-gray-700, 
+button.bg-gray-800, 
+button.bg-gray-900,
+button.bg-black,
+a.bg-primary-700, 
+a.bg-primary-800, 
+a.bg-primary-900,
+a.bg-gray-700, 
+a.bg-gray-800, 
+a.bg-gray-900,
+a.bg-black,
+button.text-white,
+a.text-white {
+  color: white !important;
+}
+
+/* EMERGENCY FIXES - HIGH SPECIFICITY */
+html:not(.dark) a.glass-button,
+html:not(.dark) button.glass-button,
+html:not(.dark) .glass-button,
+html:not(.dark) [class*="glass-button"],
+html:not(.dark) a:has(.glass-button),
+html:not(.dark) button:has(.glass-button) {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+  text-shadow: none !important;
+  background-color: white !important;
+}
+
+html.dark a.glass-button,
+html.dark button.glass-button,
+html.dark .glass-button,
+html.dark [class*="glass-button"],
+html.dark a:has(.glass-button),
+html.dark button:has(.glass-button) {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  background-color: rgba(17, 25, 40, 0.5) !important;
+}
+
+/* Special override for white text */
+html:not(.dark) .text-white {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Specific fix for the + buttons in product cards */
+html:not(.dark) .glass-button.p-2.rounded-full {
+  background-color: white !important;
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+html.dark .glass-button.p-2.rounded-full {
+  background-color: rgba(17, 25, 40, 0.7) !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Dark backgrounds still need white text in light mode */
+html:not(.dark) .bg-gray-900,
+html:not(.dark) .bg-primary-700,
+html:not(.dark) .bg-primary-800,
+html:not(.dark) .bg-primary-900,
+html:not(.dark) .bg-black,
+html:not(.dark) [class*="bg-gray-9"],
+html:not(.dark) [class*="bg-primary-7"],
+html:not(.dark) [class*="bg-primary-8"],
+html:not(.dark) [class*="bg-primary-9"],
+html:not(.dark) [class*="bg-black"] {
+  color: white !important;
+}
+
+/* Hero section specific fix */
+.container > .glass-card > div > a {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+  font-weight: bold !important;
+}
+
+.dark .container > .glass-card > div > a {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Fix any rectangular artifacts in dark mode */
+.dark .glass-card,
+.dark .glass,
+.dark [class*="glass"],
+.dark input,
+.dark select,
+.dark button {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Force proper text color in light mode buttons */
+.glass-button,
+[class*="glass-button"],
+button.glass-button,
+a.glass-button {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+  background-color: white !important;
+}
+
+/* Explicitly style primary buttons to retain their color */
+.bg-primary-600, 
+button.bg-primary-600,
+a.bg-primary-600 {
+  background-color: var(--tw-bg-opacity) !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
